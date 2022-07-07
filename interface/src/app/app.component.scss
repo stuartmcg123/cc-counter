@@ -1,0 +1,30 @@
+h1 {
+    font-size: 1rem;
+    background-color: #000;
+    border-bottom: 0.1rem solid grey;
+    margin: 0;
+    padding: 0.8rem;
+    color: #fff;
+}
+.counterContainer{
+    position: relative;
+}
+img{
+    left:0;
+    top:0;
+    width: 100%;
+}
+
+.counter{
+    position: absolute;
+    bottom: 5px;
+    left:0px;
+    z-index: 2;
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    margin: auto;
+    align-items: center;
+    justify-content: space-around;
+    background: rgba(0,0,0,.6);
+}
