@@ -1,19 +1,19 @@
-<h1>Cunt Convention Countdown</h1>
+<h1 i18n>Cunt Convention Countdown</h1>
 <div class="counterContainer">
   <img src="assets/fileImage.jpg">
   <div class="counter">
 
-    <app-counter title="Days" [number]="days"></app-counter>
-    <app-counter title="Hours" [number]="hours"></app-counter>
-    <app-counter title="Minutes" [number]="minutes"></app-counter>
-    <app-counter title="Seconds" [number]="seconds"></app-counter>
+    <app-counter title="Days" [number]="days" i18n-title></app-counter>
+    <app-counter title="Hours" [number]="hours" i18n-title></app-counter>
+    <app-counter title="Minutes" [number]="minutes" i18n-title></app-counter>
+    <app-counter title="Seconds" [number]="seconds" i18n-title></app-counter>
 
   </div>
 </div>
 <div style="display: flex; justify-content: space-around;">
-  <a href="/en-GB" i18n>English</a>
-  <a href="/jp" i18n>Japanese</a>
-  <a href="/de" i18n>German</a>
+  <a href="/en-GB">English</a>
+  <a href="/jp">日本</a>
+  <a href="/de">Deutsche</a>
 </div>
 <audio controls autoplay loop>
   <source src="assets/fc.mp3" type="audio/mp3">

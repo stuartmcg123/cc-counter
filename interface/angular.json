@@ -5,6 +5,17 @@
   "projects": {
     "interface": {
       "projectType": "application",
+      "i18n":{
+        "sourceLocale": "en-GB",
+        "locales": {
+          "jp": {
+            "translation": "messages.jp-JP.xlf"
+          },
+          "de": {
+            "translation": "messages.de-DE.xlf"
+          }
+        }
+      },
       "schematics": {
         "@schematics/angular:component": {
           "style": "scss"
@@ -20,6 +31,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
+            "localize": true,
             "outputPath": "dist/interface",
             "index": "src/index.html",
             "main": "src/main.ts",
