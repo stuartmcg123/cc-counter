@@ -1,0 +1,77 @@
+kind: Namespace
+apiVersion: v1
+metadata:
+  name: cc-dev
+  labels:
+    name: cc-dev
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+ name: cc-deployment
+ namespace: cc-dev
+ labels:
+  app: cc
+spec:
+ selector:
+  matchLabels:
+   app: cc
+ template:
+  metadata:
+   labels:
+    app: cc
+  spec:
+   containers:
+   - name: deployment
+     image: stuartmcg/counter:v0.12
+     ports:
+     - containerPort: 80
+     imagePullPolicy: Always
+---
+apiVersion: v1
+kind: Service
+metadata:
+ name: cc-svc
+ namespace: cc-dev
+spec:
+ selector:
+  app: cc
+ ports:
+ - port: 80
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+ name: cc-ingress
+ namespace: cc-dev
+ annotations:
+  cert-manager.io/issuer: "letsencrypt-prod"
+spec:
+ ingressClassName: nginx
+ tls:
+ - hosts:
+   - countdown-dev.stuartmcgillivray.com
+   - cuntdown-dev.stuartmcgillivray.com
+   secretName: cc-tls
+ rules:
+ - host: countdown-dev.stuartmcgillivray.com
+   http:
+    paths:
+    - pathType: Prefix
+      path: "/"
+      backend:
+       service:
+        name: cc-svc
+        port:
+         number: 80
+ - host: cuntdown-dev.stuartmcgillivray.com
+   http:
+    paths:
+    - pathType: Prefix
+      path: "/"
+      backend:
+       service:
+        name: cc-svc
+        port:
+         number: 80
+         
