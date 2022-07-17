@@ -1,7 +1,7 @@
 FROM node:17 AS base
 EXPOSE 80
 WORKDIR /app
-COPY package.json package-lock.json .
+COPY package.json package-lock.json ./
 RUN npm install
 COPY . .
 RUN npm run build
