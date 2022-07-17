@@ -2,12 +2,9 @@ name: Docker Image CI
 
 on:
   push:
-    branches: [ "main" ]
     tags:
      - 'v*'
-  pull_request:
-    branches: [ "main" ]
-
+     
 jobs:
 
   build:
@@ -16,13 +13,15 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
+    - name: Get version
+      uses: battila7/get-version-action@v2.2.1
     - name: Build the Docker image
-      run: docker build interface/. --file interface/Dockerfile --tag ${{ secrets.DOCKER_HUB_USERNAME }}/counter-build:testpush
+      run: docker build interface/. --file interface/Dockerfile --tag ${{ secrets.DOCKER_HUB_USERNAME }}/counter-build:${{ steps.get_version.outputs.version }}
     - uses: docker/login-action@v1
       name: login
       with:
         username:  ${{ secrets.DOCKER_HUB_USERNAME }}
         password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
     - name: Push image
-      run: docker push ${{ secrets.DOCKER_HUB_USERNAME }}/counter-build:testpush
+      run: docker push ${{ secrets.DOCKER_HUB_USERNAME }}/counter-build:${{ steps.get_version.outputs.version }}
     
